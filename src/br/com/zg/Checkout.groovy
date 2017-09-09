@@ -52,10 +52,20 @@ class Checkout {
 
     }
 
-    void remove(String nome) {
+    void remover(String name) {
 
-        Produto produto = estoque.consultarPorNome(nome)
-        carrinho.remove(produto)
+        Produto produto = estoque.consultarPorNome(name)
+
+        int totalNoCarrinho = carrinho.get(produto)
+
+        if (totalNoCarrinho > 0) {
+
+            totalNoCarrinho--
+            carrinho.put(produto, totalNoCarrinho)
+
+        } else {
+            println("nao ha mais desse produto no carrinho")//talvez seja melhor lancar uma excessao
+        }
 
     }
 
@@ -109,9 +119,9 @@ class Checkout {
                 estoque.colherProduto(produto, entrada.value)
             }
 
-            troco += (pagamento-getTotalPrice())
+            troco += (pagamento - getTotalPrice())
 
-        }else{
+        } else {
             println("Valor insuficiente para o pagamento")//talvez seja melhor lancar uma excessao
         }
     }
