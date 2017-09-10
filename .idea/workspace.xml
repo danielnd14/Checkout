@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb98fd71-4b40-40dd-82e9-ad45abe6adc8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Groovy.iml" afterPath="$PROJECT_DIR$/Groovy.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Testes/br/com/zg/CheckoutTest.groovy" afterPath="$PROJECT_DIR$/Testes/br/com/zg/CheckoutTest.groovy" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="CheckoutTest.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Testes/br/com/zg/CheckoutTest.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+            <state relative-caret-position="120">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -612,12 +611,12 @@
       <workItem from="1504928260516" duration="1957000" />
       <workItem from="1504972307717" duration="16953000" />
       <workItem from="1504990532738" duration="678000" />
-      <workItem from="1505007213450" duration="327000" />
+      <workItem from="1505007213450" duration="472000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20266000" />
+    <option name="totallyTimeSpent" value="20411000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
@@ -840,8 +839,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Testes/br/com/zg/CheckoutTest.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
