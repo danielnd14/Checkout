@@ -7,6 +7,30 @@ class Produto {
 
     private String name = ""
     private double price = 0
+
+    String getName() {
+        return name
+    }
+
+    void setName(String name) {
+        this.name = name
+    }
+
+    double getPrice() {
+        return price
+    }
+
+    void setPrice(double price) {
+        this.price = price
+    }
+
+    double getDiscount() {
+        return discount
+    }
+
+    void setDiscount(double discount) {
+        this.discount = discount
+    }
     private double discount = 0
 
     Produto(String nome, Double preco) {

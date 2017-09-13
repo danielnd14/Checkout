@@ -9,7 +9,7 @@ class Checkout {
     private Map<Produto, Integer> carrinho
 
     Checkout() {
-        estoque = new Estoque()
+        estoque = Estoque.instance
 
 
         Produto a = new Produto("A", 50.0)

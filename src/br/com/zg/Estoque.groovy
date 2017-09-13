@@ -5,7 +5,11 @@ package br.com.zg
 class Estoque {
     private Map<Produto, Integer> mapProdutos
 
-    Estoque() {
+    private static final Estoque instance = new Estoque()
+
+    static Estoque getInstance() { return instance }
+
+    private Estoque() {
         mapProdutos = [:]
     }
 
@@ -22,13 +26,13 @@ class Estoque {
         mapProdutos.remove(produto)
     }
 
-    void colherProduto(Produto produto,int quantidade) {
+    void colherProduto(Produto produto, int quantidade) {
 
         int totalEmEstoque = mapProdutos.get(produto)
 
-        if (totalEmEstoque-quantidade >= 0) {
+        if (totalEmEstoque - quantidade >= 0) {
 
-            totalEmEstoque-=quantidade
+            totalEmEstoque -= quantidade
             mapProdutos.put(produto, totalEmEstoque)
 
         } else {

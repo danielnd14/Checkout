@@ -4,7 +4,7 @@ package br.com.zg
  * Created by daniel on 09/09/17.
  */
 class RegrasDesconto implements Discount {
-    private HashMap<Produto, Integer> regras//produto e quantidade a ser comprada para encaixar no desconto
+    private Map<Produto, Integer> regras//produto e quantidade a ser comprada para encaixar no desconto
     private Estoque estoque
 
     RegrasDesconto(Estoque mapProdutos) {
