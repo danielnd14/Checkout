@@ -4,126 +4,131 @@ package br.com.zg
  * Created by daniel on 09/09/17.
  */
 class Checkout {
-    private Estoque estoque
-    private RegrasDesconto regrasDesconto
-    private Map<Produto, Integer> carrinho
+	private Estoque estoque
+	private RegrasDesconto regrasDesconto
+	private Map<Produto, Integer> carrinho
 
-    Checkout() {
-        estoque = new Estoque()
+	Checkout() {
+		estoque = new Estoque()
 
 
-        Produto a = new Produto("A", 50.0)
-        Produto b = new Produto("B", 30.0)
-        Produto c = new Produto("C", 20.0)
-        Produto d = new Produto("D", 15.0)
+		Produto a = new Produto("A", 50.0)
+		Produto b = new Produto("B", 30.0)
+		Produto c = new Produto("C", 20.0)
+		Produto d = new Produto("D", 15.0)
 
-        estoque.inserirNoEstoque(a, 500)
-        estoque.inserirNoEstoque(b, 300)
-        estoque.inserirNoEstoque(c, 200)
-        estoque.inserirNoEstoque(d, 150)
+		estoque.inserirNoEstoque(a, 500)
+		estoque.inserirNoEstoque(b, 300)
+		estoque.inserirNoEstoque(c, 200)
+		estoque.inserirNoEstoque(d, 150)
 
-        regrasDesconto = new RegrasDesconto(estoque)
-        regrasDesconto.setDiscount(a, 20, 3)
-        regrasDesconto.setDiscount(b, 15, 2)
-        regrasDesconto.setDiscount(c, 20, 3)
-        regrasDesconto.setDiscount(d, 0, 1)
+		regrasDesconto = new RegrasDesconto(estoque)
+		regrasDesconto.setDiscount(a, 20, 3)
+		regrasDesconto.setDiscount(b, 15, 2)
+		regrasDesconto.setDiscount(c, 20, 3)
+		regrasDesconto.setDiscount(d, 0, 1)
 
-        carrinho = [:]
+		carrinho = [:]
 
-    }
+	}
 
-    void add(String nome) {
+	void adicionar(String nome) throws IllegalArgumentException {
 
-        Produto produto = estoque.consultarPorNome(nome)
+		Produto produto = estoque.consultarPorNome(nome)
 
-        if (produto != null) {
+		if (produto != null) {
 
-            if (carrinho.containsKey(produto)) {
+			if (carrinho.containsKey(produto)) {
 
-                carrinho.put(produto, carrinho.get(produto) + 1)
+				carrinho.put(produto, carrinho.get(produto) + 1)
 
-            } else {
+			} else {
 
-                carrinho.put(produto, 1)
+				carrinho.put(produto, 1)
 
-            }
-        } else {
-            println("produto nao encontrado no estoque")
-        }
+			}
+		} else {
+			throw new IllegalArgumentException("produto nao encontrado no estoque")
+		}
 
-    }
+	}
 
-    void remover(String name) {
+	void removerDoCarrinho(String name) throws IllegalArgumentException {
 
-        Produto produto = estoque.consultarPorNome(name)
+		Produto produto = estoque.consultarPorNome(name)
 
-        int totalNoCarrinho = carrinho.get(produto)
+		int totalNoCarrinho = carrinho.get(produto)
 
-        if (totalNoCarrinho > 0) {
+		if (totalNoCarrinho > 0) {
 
-            totalNoCarrinho--
-            carrinho.put(produto, totalNoCarrinho)
+			totalNoCarrinho--
+			carrinho.put(produto, totalNoCarrinho)
 
-        } else {
-            println("nao ha mais desse produto no carrinho")//talvez seja melhor lancar uma excessao
-        }
+		} else {
 
-    }
+			throw new IllegalArgumentException("nao ha mais desse produto no carrinho")
+		}
 
-    BigDecimal getTotalPrice() {
-        BigDecimal total = 0.0
-        BigDecimal discount = 0.0
+	}
 
-        Produto produto
+	BigDecimal getTotalPrice() {
 
-        for (Map.Entry<Produto, Integer> entrada : carrinho.entrySet()) {
+		BigDecimal total = 0.0
+		BigDecimal discount = 0.0
 
-            produto = entrada.key
-            int qtdCarrinho = entrada.value
+		Produto produto
 
-            total += produto.price * qtdCarrinho
+		carrinho.entrySet().each {
 
-            int multiplo = regrasDesconto.getQuantidadeParaDesconto(produto)
-            multiplo = qtdCarrinho / (multiplo != 0 ? multiplo : 1)
-            discount += multiplo * produto.discount
+			produto = it.key
+			int qtdCarrinho = it.value
 
-        }
-        return total - discount
-    }
+			total += produto.price * qtdCarrinho
 
-    BigDecimal getTotalDiscount() {
+			int multiplo = regrasDesconto.getQuantidadeParaDesconto(produto)
+			multiplo = qtdCarrinho / (multiplo != 0 ? multiplo : 1)
+			discount += multiplo * produto.discount
+		}
 
-        BigDecimal total = 0.0
-        Produto produto
-        for (Map.Entry<Produto, Integer> entrada : carrinho.entrySet()) {
+		return total - discount
+	}
 
-            produto = entrada.key
-            int qtdCarrinho = entrada.value
+	BigDecimal getTotalDiscount() {
 
-            int multiplo = regrasDesconto.getQuantidadeParaDesconto(produto)
-            multiplo = qtdCarrinho / (multiplo != 0 ? multiplo : 1)
-            total += multiplo * produto.discount
-        }
-        return total
+		BigDecimal total = 0.0
+		Produto produto
 
-    }
+		carrinho.entrySet().each {
 
-    BigDecimal pagar(BigDecimal pagamento) {
+			produto = it.key
+			int qtdCarrinho = it.value
 
-        Produto produto
-        BigDecimal troco = 0.0
+			int multiplo = regrasDesconto.getQuantidadeParaDesconto(produto)
+			multiplo = qtdCarrinho / (multiplo != 0 ? multiplo : 1)
+			total += multiplo * produto.discount
 
-        if ((pagamento - getTotalPrice()) >= 0) {
+		}
+		return total
 
-            for (Map.Entry<Produto, Integer> entrada : carrinho.entrySet()) {
-                produto = entrada.key
-                estoque.colherProduto(produto, entrada.value)
-            }
+	}
 
-            troco += (pagamento - getTotalPrice())
+	BigDecimal pagar(BigDecimal pagamento) throws IllegalArgumentException {
 
-        } else {
-            println("Valor insuficiente para o pagamento")//talvez seja melhor lancar uma excessao
-        }
-    }
+		Produto produto
+		BigDecimal troco = 0.0
+
+		if ((pagamento - getTotalPrice()) >= 0) {
+
+			carrinho.entrySet().each {
+				produto = it.key
+				estoque.colherProduto(produto, it.value)
+			}
+
+			troco += (pagamento - getTotalPrice())
+
+		} else {
+			throw new IllegalArgumentException("Valor insuficiente para o pagamento")
+		}
+		return troco
+	}
 }

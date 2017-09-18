@@ -32,7 +32,7 @@ class Estoque {
             mapProdutos.put(produto, totalEmEstoque)
 
         } else {
-            println("nao ha mais desse Produto em estoque")//talvez seja melhor lancar uma excessao
+            throw new IllegalArgumentException("nao ha mais desse Produto em estoque")
         }
 
     }
@@ -42,14 +42,12 @@ class Estoque {
     }
 
     Produto consultarPorNome(String nome) {
-        Produto produto2
+
 
         for (Produto produto1 : mapProdutos.keySet()) {
             if (nome.equalsIgnoreCase(produto1.name)) {
-                produto2 = produto1
-                break
+                return produto1
             }
         }
-        return produto2
     }
 }

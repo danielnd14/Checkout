@@ -22,7 +22,8 @@ class RegrasDesconto implements Discount {
             regras.put(produto, quantidade)
 
         } else {
-            println("nao existe esse produto no estoque")
+
+            throw new IllegalArgumentException("nao existe esse produto no estoque")
         }
 
     }
