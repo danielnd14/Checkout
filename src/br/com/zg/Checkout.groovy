@@ -9,7 +9,7 @@ class Checkout {
     private Map<Produto, Integer> carrinho
 
     Checkout() {
-        estoque = Estoque.instance
+        estoque = new Estoque()
 
 
         Produto a = new Produto("A", 50.0)
@@ -27,6 +27,7 @@ class Checkout {
         regrasDesconto.setDiscount(b, 15, 2)
         regrasDesconto.setDiscount(c, 20, 3)
         regrasDesconto.setDiscount(d, 0, 1)
+
         carrinho = [:]
 
     }
@@ -69,9 +70,9 @@ class Checkout {
 
     }
 
-    double getTotalPrice() {
-        double total = 0.0
-        double discount = 0.0
+    BigDecimal getTotalPrice() {
+        BigDecimal total = 0.0
+        BigDecimal discount = 0.0
 
         Produto produto
 
@@ -90,9 +91,9 @@ class Checkout {
         return total - discount
     }
 
-    double getTotalDiscount() {
+    BigDecimal getTotalDiscount() {
 
-        double total = 0.0
+        BigDecimal total = 0.0
         Produto produto
         for (Map.Entry<Produto, Integer> entrada : carrinho.entrySet()) {
 
@@ -107,10 +108,10 @@ class Checkout {
 
     }
 
-    double pagar(double pagamento) {
+    BigDecimal pagar(BigDecimal pagamento) {
 
         Produto produto
-        double troco = 0.0
+        BigDecimal troco = 0.0
 
         if ((pagamento - getTotalPrice()) >= 0) {
 

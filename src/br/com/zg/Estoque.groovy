@@ -5,11 +5,7 @@ package br.com.zg
 class Estoque {
     private Map<Produto, Integer> mapProdutos
 
-    private static final Estoque instance = new Estoque()
-
-    static Estoque getInstance() { return instance }
-
-    private Estoque() {
+    Estoque() {
         mapProdutos = [:]
     }
 
@@ -36,7 +32,7 @@ class Estoque {
             mapProdutos.put(produto, totalEmEstoque)
 
         } else {
-            println("nao ha mais desse mapProdutos em estoque")//talvez seja melhor lancar uma excessao
+            println("nao ha mais desse Produto em estoque")//talvez seja melhor lancar uma excessao
         }
 
     }
